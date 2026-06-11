@@ -14,7 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const corsOption = {
   origin: [
-    "https://kineti-x-frontend.vercel.app",
+    "https://testdeploy-one-lake.vercel.app",
     "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:5175",
@@ -25,9 +25,10 @@ const corsOption = {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cors(corsOption));
+
 app.use(helmet());
 app.use(cookieParser());
-app.use(cors(corsOption));
 app.use(express.json());
 app.use(limiter);
 
@@ -46,7 +47,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.get("/", (req, res) => {
   res.send("Welcome to Kinetix");
 });
-// http//localhost:5000/api
+
 app.use("/api", apiRouter);
 
 await connectDB();
